@@ -12,6 +12,7 @@ LICENSE="EULA"
 KEYWORDS="~amd64"
 SLOT="0"
 IUSE=""
+A="surfshark_2.1.0-2503_amd64.deb"
 
 REDEPEND="media-libs/alsa-lib
         app-accessibility/at-spi2-core
@@ -24,9 +25,7 @@ DEPEND="${REDEPEND}"
 RESTRICT="strip"
 
 src_unpack() {
-        if [[ -n ${A} ]]; then
-                unpack ${A}
-        fi
+        unpack ${A}
 }
 
 src_install() {
