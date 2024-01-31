@@ -33,7 +33,7 @@ src_install() {
         # Install extracted files
         dodir /opt/Surfshark
         insinto /opt/Surfshark
-        doins "${WORKDIR}"/opt/Surfshark/*
+        doins "${WORKDIR}"/opt/Surfshark/**/*
 
         # Install services
         insinto /usr/lib/systemd/user
