@@ -30,7 +30,9 @@ src_unpack() {
 
 src_install() {
         default
+}
 
+pkg_postinst() {
         # Post-install tasks
         dosym /opt/Surfshark/surfshark /usr/bin/surfshark
         chmod 4755 /opt/Surfshark/chrome-sandbox || true
