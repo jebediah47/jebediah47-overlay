@@ -25,6 +25,7 @@ RESTRICT="strip"
 
 src_unpack() {
         unpack ${A}
+        mkdir -p "${S}"
 }
 
 src_install() {
