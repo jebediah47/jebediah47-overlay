@@ -37,30 +37,30 @@ src_install() {
 
         # Install services
         insinto /usr/lib/systemd/user
-        doins "${WORKDIR}"/usr/lib/systemd/user/*.service
+        doins -r "${WORKDIR}"/usr/lib/systemd/user/*.service
         insinto /usr/lib/systemd/system
-        doins "${WORKDIR}"/usr/lib/systemd/system/*.service
+        doins -r "${WORKDIR}"/usr/lib/systemd/system/*.service
         doinitd "${WORKDIR}"/etc/init.d/surfshark
         doinitd "${WORKDIR}"/etc/init.d/surfshark2
 
         # Install icons
         insinto /usr/share/icons/hicolor/128x128/apps
-        doins "${WORKDIR}"/usr/share/icons/hicolor/128x128/apps/*.png
+        doins -r "${WORKDIR}"/usr/share/icons/hicolor/128x128/apps/*.png
 
         # Install desktop file
         insinto /usr/share/applications
-        doins "${WORKDIR}"/usr/share/applications/*.desktop
+        doins -r "${WORKDIR}"/usr/share/applications/*.desktop
 
         # Install docs
         dodir /usr/share/doc/surfshark
         insinto /usr/share/doc/surfshark
-        doins "${WORKDIR}"/usr/share/doc/surfshark/*.gz
+        doins -r "${WORKDIR}"/usr/share/doc/surfshark/*.gz
 
         # Install certificates
         dodir /var/lib/surfshark
         insinto /var/lib/surfshark
-        doins "${WORKDIR}"/var/lib/surfshark/*.cer
-        doins "${WORKDIR}"/var/lib/surfshark/*.key
+        doins -r "${WORKDIR}"/var/lib/surfshark/*.cer
+        doins -r "${WORKDIR}"/var/lib/surfshark/*.key
 }
 
 pkg_postinst() {
