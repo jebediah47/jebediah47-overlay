@@ -33,15 +33,15 @@ src_install() {
         # Install extracted files
         dodir /opt/Surfshark
         insinto /opt/Surfshark
-        doins "${WORKDIR}"/opt/Surfshark/**/*
+        doins -r "${WORKDIR}"/opt/Surfshark/*
 
         # Install services
         insinto /usr/lib/systemd/user
         doins "${WORKDIR}"/usr/lib/systemd/user/*.service
         insinto /usr/lib/systemd/system
         doins "${WORKDIR}"/usr/lib/systemd/system/*.service
-        insintop /etc/init.d
-        doins "${WORKDIR}"/etc/init.d/*
+        doinitd "${WORKDIR}"/etc/init.d/surfshark
+        doinitd "${WORKDIR}"/etc/init.d/surfshark2
 
         # Install icons
         insinto /usr/share/icons/hicolor/128x128/apps
