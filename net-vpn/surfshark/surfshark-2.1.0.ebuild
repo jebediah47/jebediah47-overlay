@@ -29,7 +29,37 @@ src_unpack() {
 }
 
 src_install() {
-        default
+        # Install extracted files
+        dodir /opt/Surfshark
+        insinto /opt/Surfshark
+        doins "${WORKDIR}"/opt/Surfshark/*
+
+        # Install services
+        insinto /usr/lib/systemd/user
+        doins "${WORKDIR}"/usr/lib/systemd/user/*.service
+        insinto /usr/lib/systemd/system
+        doins "${WORKDIR}"/usr/lib/systemd/system/*.service
+        insintop /etc/init.d
+        doins "${WORKDIR}"/etc/init.d/*
+
+        # Install icons
+        insinto /usr/share/icons/hicolor/128x128/apps
+        doins "${WORKDIR}"/usr/share/icons/hicolor/128x128/apps/*.png
+
+        # Install desktop file
+        insinto /usr/share/applications
+        doins "${WORKDIR}"/usr/share/applications/*.desktop
+
+        # Install docs
+        dodir /usr/share/doc/surfshark
+        insinto /usr/share/doc/surfshark
+        doins "${WORKDIR}"/usr/share/doc/surfshark/*.gz
+
+        # Install certificates
+        dodir /var/lib/surfshark
+        insinto /var/lib/surfshark
+        doins "${WORKDIR}"/var/lib/surfshark/*.cer
+        doins "${WORKDIR}"/var/lib/surfshark/*.key
 }
 
 pkg_postinst() {
@@ -38,49 +68,6 @@ pkg_postinst() {
         chmod 4755 /opt/Surfshark/chrome-sandbox || true
         update-mime-database /usr/share/mime || true
         update-desktop-database /usr/share/applications || true
-
-        # Systemd services
-        insinto /usr/lib/systemd/user
-        doins - \
-                \
-                surfsharkd.service <<<'
-        [Unit]
-        Description=Surfshark Daemon
-
-        [Service]
-        ExecStart=/opt/Surfshark/resources/dist/resources/surfsharkd.js
-        Restart=on-failure
-        RestartSec=5
-        IPAddressDeny=any
-        RestrictRealtime=true
-        ProtectKernelTunables=true
-        ProtectSystem=full
-        RestrictSUIDSGID=true
-
-        [Install]
-        WantedBy=default.target
-        ' || die "Failed to install surfsharkd.service"
-
-        insinto /usr/lib/systemd/system
-        doins - \
-                \
-                surfsharkd2.service <<<'
-        [Unit]
-        Description=Surfshark Daemon2
-
-        [Service]
-        ExecStart=/opt/Surfshark/resources/dist/resources/surfsharkd2.js
-        Restart=on-failure
-        RestartSec=5
-        IPAddressDeny=any
-        RestrictRealtime=true
-        ProtectKernelTunables=true
-        ProtectSystem=full
-        RestrictSUIDSGID=true
-
-        [Install]
-        WantedBy=default.target
-        ' || die "Failed to install surfsharkd2.service"
 
         chmod 644 /usr/lib/systemd/user/surfsharkd.service || die "Failed to set permissions for surfsharkd.service"
         chmod 644 /usr/lib/systemd/system/surfsharkd2.service || die "Failed to set permissions for surfsharkd2.service"
