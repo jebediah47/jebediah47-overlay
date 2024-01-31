@@ -1,0 +1,14 @@
+BDEPEND=virtual/pkgconfig
+DEFINED_PHASES=install postrm unpack
+DEPEND=media-libs/alsa-libs app-accessibility/at-spi2-core dev-libs/gjs dev-libs/nss gnome-base/gnome-keyring net-vpn/wireguard-tools
+DESCRIPTION=Surfshark VPN GUI client for Linux.
+EAPI=7
+HOMEPAGE=https://surfshark.com
+INHERIT=gnome2-utils xdg-utils systemd
+KEYWORDS=~amd64
+LICENSE=EULA
+RESTRICT=strip
+SLOT=0
+SRC_URI=https://ocean.surfshark.com/debian/pool/main/s/surfshark_2.1.0-2503_amd64.deb
+_eclasses_=toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	xdg-utils	baea6080dd821f5562d715887954c9d3	gnome2-utils	b0183db3b2e07b18f3b77bffec72e116	systemd	c8b03e8df84486aa991d4396686e8942
+_md5_=c4c455c1ca78b17f1b31c1c18235aa4c
