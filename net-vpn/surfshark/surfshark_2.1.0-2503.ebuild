@@ -157,5 +157,5 @@ pkg_postrm() {
         ip6tables -S | grep surfshark_ks | sed -r '/.*comment.*surfshark_ks*/s/-A/ip6tables -D/e' || true
 
         # Update desktop database
-        update-desktop-database /usr/share/applications || true
+        update-desktop-database /usr/share/applications
 }
