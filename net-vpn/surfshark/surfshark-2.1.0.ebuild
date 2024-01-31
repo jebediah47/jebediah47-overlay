@@ -13,7 +13,7 @@ KEYWORDS="~amd64"
 SLOT="0"
 IUSE=""
 
-REDEPEND="media-libs/alsa-libs
+REDEPEND="media-libs/alsa-lib
         app-accessibility/at-spi2-core
         dev-libs/gjs
         dev-libs/nss
