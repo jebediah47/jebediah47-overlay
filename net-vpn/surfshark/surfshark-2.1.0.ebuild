@@ -61,12 +61,10 @@ src_install() {
         insinto /var/lib/surfshark
         doins -r "${WORKDIR}"/var/lib/surfshark/*.cer
         doins -r "${WORKDIR}"/var/lib/surfshark/*.key
-}
 
-pkg_postinst() {
         # Post-install tasks
-        dosym /opt/Surfshark/surfshark /usr/bin/surfshark
-        chmod 4755 /opt/Surfshark/chrome-sandbox || true
+        dosym /opt/Surfshark/surfshark /usr/bin/surfshark || die "Failed to create symbolic link"
+        chmod 4755 /opt/Surfshark/chrome-sandbox || die "Failed to set permissions for chrome-sandbox"
         update-mime-database /usr/share/mime || true
         update-desktop-database /usr/share/applications || true
 
@@ -74,12 +72,12 @@ pkg_postinst() {
         chmod 644 /usr/lib/systemd/system/surfsharkd2.service || die "Failed to set permissions for surfsharkd2.service"
 
         # Set permissions for scripts and executables
-        chmod 755 /opt/Surfshark/resources/dist/resources/surfsharkd.js || true
-        chmod 755 /opt/Surfshark/resources/dist/resources/surfsharkd2.js || true
-        chmod 755 /opt/Surfshark/resources/dist/resources/update || true
-        chmod 755 /opt/Surfshark/resources/dist/resources/diagnostics || true
-        chmod 755 /etc/init.d/surfshark || true
-        chmod 755 /etc/init.d/surfshark2 || true
+        chmod 755 /opt/Surfshark/resources/dist/resources/surfsharkd.js || die "Failed to set permissions for surfsharkd.js"
+        chmod 755 /opt/Surfshark/resources/dist/resources/surfsharkd2.js || die "Failed to set permissions for surfsharkd2.js"
+        chmod 755 /opt/Surfshark/resources/dist/resources/update || die "Failed to set permissions for update"
+        chmod 755 /opt/Surfshark/resources/dist/resources/diagnostics || die "Failed to set permissions for diagnostics"
+        chmod 755 /etc/init.d/surfshark || die "Failed to set permissions for surfshark"
+        chmod 755 /etc/init.d/surfshark2 || die "Failed to set permissions for surfshark2"
 
         # Enable services based on init system
         case "$(ps -p 1 --no-headers -o '%c' | tr -d '\n')" in
