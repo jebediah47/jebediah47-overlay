@@ -24,7 +24,7 @@ DEPEND="${REDEPEND}"
 RESTRICT="strip"
 
 src_unpack() {
-        unack_deb "${A}"
+        unpack_deb "${A}"
         mkdir -p "${S}"
         ls -lR "${WORKDIR}"
 }
