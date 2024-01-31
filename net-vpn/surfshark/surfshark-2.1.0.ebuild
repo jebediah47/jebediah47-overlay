@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit gnome2-utils xdg-utils systemd
+inherit gnome2-utils xdg-utils systemd unpacker
 
 DESCRIPTION="Surfshark VPN GUI client for Linux."
 HOMEPAGE="https://surfshark.com"
@@ -24,8 +24,8 @@ DEPEND="${REDEPEND}"
 RESTRICT="strip"
 
 src_unpack() {
-        unpack "${A}"
-        cp -r "${S}"/* "${D}" || die "Failed to copy files"
+        unpack_deb "${A}"
+        ls -lR "${S}"
 }
 
 src_install() {
