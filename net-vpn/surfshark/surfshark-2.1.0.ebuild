@@ -32,20 +32,20 @@ src_install() {
         # Extract files from deb package
         dodir /opt/Surfshark
         insinto /opt/Surfshark
-        doins -r "${WORKDIR}"opt/Surfshark/*
+        doins -r "${WORKDIR}"/opt/Surfshark/*
 
         insinto /usr/share/doc
-        doins -r "${WORKDIR}"usr/share/doc/*
+        doins -r "${WORKDIR}"/usr/share/doc/*
         insinto /usr/share/icons/hicolor/128x128/apps/
-        doins -r "${WORKDIR}"usr/share/icons/hicolor/128x128/apps/surfshark.png
+        doins -r "${WORKDIR}"/usr/share/icons/hicolor/128x128/apps/surfshark.png
         insinto /usr/share/applications
-        doins -r "${WORKDIR}"usr/share/applications/surfshark.desktop
+        doins -r "${WORKDIR}"/usr/share/applications/surfshark.desktop
 
         insinto /etc/init.d/
-        doins -r "${WORKDIR}"etc/init.d/*
+        doins -r "${WORKDIR}"/etc/init.d/*
 
         insinto /var/lib/surfshark/
-        doins -r var/lib/surfshark/surfshark/*
+        doins -r "${WORKDIR}"/var/lib/surfshark/surfshark/*
 
         # Post-install tasks
         dosym /opt/Surfshark/surfshark /usr/bin/surfshark
