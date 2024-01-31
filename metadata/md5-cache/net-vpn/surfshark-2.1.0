@@ -11,4 +11,4 @@ RESTRICT=strip
 SLOT=0
 SRC_URI=https://ocean.surfshark.com/debian/pool/main/s/surfshark_2.1.0-2503_amd64.deb
 _eclasses_=toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	xdg-utils	baea6080dd821f5562d715887954c9d3	gnome2-utils	b0183db3b2e07b18f3b77bffec72e116	systemd	c8b03e8df84486aa991d4396686e8942
-_md5_=c02189698f2f463468e44d19b676eeb4
+_md5_=f26922750b9f7b47272159f84c003ac1
