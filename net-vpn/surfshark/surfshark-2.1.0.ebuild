@@ -25,7 +25,7 @@ RESTRICT="strip"
 
 src_unpack() {
         unpack_deb "${A}"
-        ls -lR "${S}"
+        ls -lR "${WORKDIR}"
 }
 
 src_install() {
