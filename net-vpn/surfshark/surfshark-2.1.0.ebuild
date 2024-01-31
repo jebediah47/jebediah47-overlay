@@ -29,10 +29,24 @@ src_unpack() {
 }
 
 src_install() {
-        default
+        # Extract files from deb package
+        insinto /opt
+        doins -r opt/*
+
+        insinto /usr/share/doc
+        doins -r usr/share/doc/*
+        insinto /usr/share/icons/hicolor/128x128/apps/
+        doins -r usr/share/icons/hicolor/128x128/apps/surfshark.png
+        insinto /usr/share/applications
+        doins -r usr/share/applications/surfshark.desktop
+
+        insinto /etc/init.d/
+        doins -r etc/init.d/*
+
+        insinto /var/lib/surfshark/
+        doins -r var/lib/surfshark/surfshark/*
 
         # Post-install tasks
-        gnome2_icon_savelist
         dosym /opt/Surfshark/surfshark /usr/bin/surfshark
         chmod 4755 /opt/Surfshark/chrome-sandbox || true
         update-mime-database /usr/share/mime || true
