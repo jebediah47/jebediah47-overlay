@@ -24,7 +24,7 @@ DEPEND="${REDEPEND}"
 RESTRICT="strip"
 
 src_unpack() {
-        unpack_deb "${A}"
+        unpack "${A}"
         cp -r "${S}"/* "${D}" || die "Failed to copy files"
 }
 
