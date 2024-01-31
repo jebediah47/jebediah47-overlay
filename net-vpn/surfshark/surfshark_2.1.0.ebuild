@@ -7,7 +7,7 @@ inherit gnome2-utils xdg-utils systemd
 
 DESCRIPTION="Surfshark VPN GUI client for Linux."
 HOMEPAGE="https://surfshark.com"
-SRC_URI="https://ocean.surfshark.com/debian/pool/main/s/${PN}-${PVR}_amd64.deb"
+SRC_URI="https://ocean.surfshark.com/debian/pool/main/s/surfshark_2.1.0-2503_amd64.deb"
 LICENSE="EULA"
 KEYWORDS="~amd64"
 SLOT="0"
