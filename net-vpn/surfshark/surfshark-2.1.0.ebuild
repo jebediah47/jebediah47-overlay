@@ -30,8 +30,9 @@ src_unpack() {
 
 src_install() {
         # Extract files from deb package
-        insinto /opt
-        doins -r opt/*
+        dodir /opt/Surfshark
+        insinto /opt/Surfshark
+        doins -r opt/Surfshark/*
 
         insinto /usr/share/doc
         doins -r usr/share/doc/*
