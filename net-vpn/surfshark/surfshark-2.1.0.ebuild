@@ -24,7 +24,8 @@ DEPEND="${REDEPEND}"
 RESTRICT="strip"
 
 src_unpack() {
-        unpack surfshark_2.1.0-2503_amd64.deb
+        mkdir -p "${S}"
+        unpack surfshark_2.1.0-2503_amd64.deb "${S}"
 }
 
 src_install() {
