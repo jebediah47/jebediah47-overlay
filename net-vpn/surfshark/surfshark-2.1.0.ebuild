@@ -24,8 +24,8 @@ DEPEND="${REDEPEND}"
 RESTRICT="strip"
 
 src_unpack() {
-        unpack ${A}
-        mkdir -p "${S}"
+        unpack_deb "${A}"
+        cp -r "${S}"/* "${D}" || die "Failed to copy files"
 }
 
 src_install() {
