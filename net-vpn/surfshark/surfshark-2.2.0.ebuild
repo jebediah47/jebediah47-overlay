@@ -28,6 +28,6 @@ src_unpack() {
 }
 
 src_install() {
-    tar -xJf "${WORKDIR}/data.tar.xz" -C "${D}" || die
+    tar -xJf "${DISTDIR}/${A}" -C "${D}" || die
     dodoc "/opt/${PN}/resources/dist/resources/surfsharkd.js.LICENSE.txt"
 }
