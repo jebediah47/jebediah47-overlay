@@ -61,9 +61,7 @@ src_install() {
     insinto /var/lib/surfshark
     doins -r "${WORKDIR}"/var/lib/surfshark/*.cer
     doins -r "${WORKDIR}"/var/lib/surfshark/*.key
-}
 
-pkg_postinst() {
     # Post-install tasks
     dosym /opt/Surfshark/surfshark /usr/bin/surfshark || die "Failed to create symbolic link"
     chmod 4755 /opt/Surfshark/chrome-sandbox || die "Failed to set permissions for chrome-sandbox"
