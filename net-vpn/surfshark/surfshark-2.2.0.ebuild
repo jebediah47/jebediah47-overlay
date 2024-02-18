@@ -21,14 +21,13 @@ REDEPEND="media-libs/alsa-lib
         net-vpn/wireguard-tools"
 DEPEND="${REDEPEND}"
 
-RESTRICT="strip"
+S="${WORKDIR}"
 
 src_unpack() {
     unpack_deb "${A}"
-    mkdir -p "${S}"
-    ls -lR "${WORKDIR}"
 }
 
 src_install() {
-    default
+    tar -xJf "${WORKDIR}/data.tar.xz" -C "${D}" || die
+    dodoc "/opt/${PN}/resources/dist/resources/surfsharkd.js.LICENSE.txt"
 }
