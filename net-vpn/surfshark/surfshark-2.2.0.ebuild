@@ -81,9 +81,6 @@ pkg_prerm() {
     /etc/init.d/surfshark stop || true
     /etc/init.d/surfshark2 stop || true
 
-    kill -15 $(pidof surfshark) || :
-    kill -15 $(pgrep surfsharkd) || :
-
     rm -rf /run/surfshark || :
     rm -f /tmp/surfsharkd.sock || :
     rm -f /tmp/surfshark-electron.sock || :
