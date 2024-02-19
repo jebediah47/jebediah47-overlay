@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit gnome2-utils xdg-utils systemd unpacker
+inherit gnome2-utils xdg-utils systemd
 
 DESCRIPTION="Surfshark VPN GUI client for Linux."
 HOMEPAGE="https://surfshark.com"
@@ -26,6 +26,7 @@ S="${WORKDIR}"
 src_unpack() {
     unpack ${A}
     unpack "${S}"/data.tar.xz
+    rm "${S}"/{control,data,debian}* || die
 }
 
 src_install() {
@@ -39,8 +40,6 @@ src_install() {
     fperms 755 '/opt/Surfshark/libvk_swiftshader.so'
     fperms 755 '/opt/Surfshark/libvulkan.so.1'
     fperms 755 '/opt/Surfshark/surfshark'
-
-    # Give permissions to services
     fperms 644 '/usr/lib/systemd/user/surfsharkd.service'
     fperms 644 '/usr/lib/systemd/system/surfsharkd2.service'
     fperms 755 '/opt/Surfshark/resources/dist/resources/surfsharkd.js'
@@ -49,7 +48,7 @@ src_install() {
     fperms 755 '/opt/Surfshark/resources/dist/resources/diagnostics'
     fperms 755 '/etc/init.d/surfshark'
     fperms 755 '/etc/init.d/surfshark2'
-    dosym /opt/Surfshark/surfshark /usr/bin/surfshark
+    dosym /opt/Surfshark/surfshark /usr/bin/${PN} || die
 }
 
 pkg_postinst() {
@@ -65,10 +64,12 @@ pkg_postinst() {
         /etc/init.d/surfshark2 restart || true
         ;;
     *)
-        echo "Unsupported service manager"
+        ewarn "Unsupported service manager"
         ;;
     esac
-    update-desktop-database -q
+
+    xdg_desktop_database_update
+    xdg_mimeinfo_database_update
 }
 
 pkg_postrm() {
@@ -105,5 +106,7 @@ pkg_postrm() {
 
     iptables -S | grep surfshark_ks | sed -r '/.*comment.*surfshark_ks*/s/-A/iptables -D/e' || true
     ip6tables -S | grep surfshark_ks | sed -r '/.*comment.*surfshark_ks*/s/-A/ip6tables -D/e' || true
-    update-desktop-database -q
+
+    xdg_desktop_database_update
+    xdg_mimeinfo_database_update
 }
