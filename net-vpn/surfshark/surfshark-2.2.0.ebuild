@@ -30,14 +30,80 @@ src_unpack() {
 
 src_install() {
     doins -r *
-    fperms 4755 /opt/Surfshark/chrome-sandbox || die
-    fperms 644 /usr/lib/systemd/user/surfsharkd.service || die
-    fperms 644 /usr/lib/systemd/system/surfsharkd2.service || die
-    fperms 755 /opt/Surfshark/resources/dist/resources/surfsharkd.js || die
-    fperms 755 '/opt/Surfshark/resources/dist/resources/surfsharkd2.js' || die
-    fperms 755 '/opt/Surfshark/resources/dist/resources/update' || die
-    fperms 755 '/opt/Surfshark/resources/dist/resources/diagnostics' || die
-    fperms 755 '/etc/init.d/surfshark' || die
-    fperms 755 '/etc/init.d/surfshark2' || die
-    dosym /opt/Surfshark/surfshark /usr/bin/surfshark || die
+    # Give permissions to the files
+    fperms 4755 '/opt/Surfshark/chrome-sandbox'
+    fperms 755 '/opt/Surfshark/chrome_crashpad_handler'
+    fperms 755 '/opt/Surfshark/libEGL.so'
+    fperms 755 '/opt/Surfshark/libffmpeg.so'
+    fperms 755 '/opt/Surfshark/libGLESv2.so'
+    fperms 755 '/opt/Surfshark/libvk_swiftshader.so'
+    fperms 755 '/opt/Surfshark/libvulkan.so.1'
+    fperms 755 '/opt/Surfshark/surfshark'
+
+    # Give permissions to services
+    fperms 644 '/usr/lib/systemd/user/surfsharkd.service'
+    fperms 644 '/usr/lib/systemd/system/surfsharkd2.service'
+    fperms 755 '/opt/Surfshark/resources/dist/resources/surfsharkd.js'
+    fperms 755 '/opt/Surfshark/resources/dist/resources/surfsharkd2.js'
+    fperms 755 '/opt/Surfshark/resources/dist/resources/update'
+    fperms 755 '/opt/Surfshark/resources/dist/resources/diagnostics'
+    fperms 755 '/etc/init.d/surfshark'
+    fperms 755 '/etc/init.d/surfshark2'
+    dosym /opt/Surfshark/surfshark /usr/bin/surfshark
+}
+
+pkg_postinst() {
+    case "$(ps -p 1 --no-headers -o '%c' | tr -d '\n')" in
+    systemd)
+        systemctl daemon-reload || true
+        systemctl enable --global surfsharkd.service || true
+        ;;
+    init)
+        update-rc.d surfshark defaults || true
+        update-rc.d surfshark2 defaults || true
+        /etc/init.d/surfshark restart || true
+        /etc/init.d/surfshark2 restart || true
+        ;;
+    *)
+        echo "Unsupported service manager"
+        ;;
+    esac
+    update-desktop-database -q
+}
+
+pkg_postrm() {
+    systemctl disable --global surfsharkd.service || true
+    systemctl disable surfsharkd2.service || true
+
+    systemctl stop surfsharkd2.service || true
+
+    /etc/init.d/surfshark stop || true
+    /etc/init.d/surfshark2 stop || true
+
+    kill -15 $(pidof surfshark) || :
+    kill -15 $(pgrep surfsharkd) || :
+
+    rm -rf /run/surfshark || :
+    rm -f /tmp/surfsharkd.sock || :
+    rm -f /tmp/surfshark-electron.sock || :
+    rm -f $XDG_RUNTIME_DIR/surfsharkd.sock || :
+    rm -f $XDG_RUNTIME_DIR/surfshark-electron.sock || :
+
+    rm -f '/usr/bin/surfshark' || :
+
+    # Surfshark post-remove
+    nmcli connection delete surfshark_ipv6 || true
+    nmcli connection delete surfshark_wg || true
+    nmcli connection delete surfshark_openvpn || true
+
+    shopt -s globstar
+    if [ "$1" = purge ]; then
+        rm -rf /home/**/.config/Surfshark || true
+    fi
+
+    rm -rf /home/**/.cache/Surfshark || true
+
+    iptables -S | grep surfshark_ks | sed -r '/.*comment.*surfshark_ks*/s/-A/iptables -D/e' || true
+    ip6tables -S | grep surfshark_ks | sed -r '/.*comment.*surfshark_ks*/s/-A/ip6tables -D/e' || true
+    update-desktop-database -q
 }
