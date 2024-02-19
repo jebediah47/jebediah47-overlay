@@ -70,6 +70,8 @@ pkg_postinst() {
 
     xdg_desktop_database_update
     xdg_mimeinfo_database_update
+
+    gnome2_icon_cache_update
 }
 
 pkg_prerm() {
@@ -106,7 +108,9 @@ pkg_prerm() {
 
     iptables -S | grep surfshark_ks | sed -r '/.*comment.*surfshark_ks*/s/-A/iptables -D/e' || true
     ip6tables -S | grep surfshark_ks | sed -r '/.*comment.*surfshark_ks*/s/-A/ip6tables -D/e' || true
+}
 
+pkg_postrm() {
     xdg_desktop_database_update
     xdg_mimeinfo_database_update
 }
