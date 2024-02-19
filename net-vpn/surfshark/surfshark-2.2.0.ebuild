@@ -27,7 +27,7 @@ src_unpack() {
     unpack ${A}
     unpack "${S}"/data.tar.xz
     rm "${S}"/{control,data,debian}* || die
-    rm "${S}"/usr/share/doc/surfshark/changelog.gz || die
+    rm "${S}"/usr/share/doc || die
     rm "${S}"/_gpgbuilder || die
 }
 
@@ -80,9 +80,6 @@ pkg_prerm() {
 
     systemctl stop surfsharkd2.service || true
 
-    /etc/init.d/surfshark stop || true
-    /etc/init.d/surfshark2 stop || true
-
     rm -rf /run/surfshark || :
     rm -f /tmp/surfsharkd.sock || :
     rm -f /tmp/surfshark-electron.sock || :
@@ -90,11 +87,6 @@ pkg_prerm() {
     rm -f $XDG_RUNTIME_DIR/surfshark-electron.sock || :
 
     rm -f '/usr/bin/surfshark' || :
-
-    # Surfshark post-remove
-    nmcli connection delete surfshark_ipv6 || true
-    nmcli connection delete surfshark_wg || true
-    nmcli connection delete surfshark_openvpn || true
 
     shopt -s globstar
     if [ "$1" = purge ]; then
