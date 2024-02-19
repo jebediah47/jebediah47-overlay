@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit gnome2-utils xdg-utils systemd
+inherit xdg-utils
 
 DESCRIPTION="Surfshark VPN GUI client for Linux."
 HOMEPAGE="https://surfshark.com"
@@ -26,7 +26,7 @@ S="${WORKDIR}"
 src_unpack() {
     unpack ${A}
     unpack "${S}"/data.tar.xz
-    rm "${S}"/{control,data,debian}* || die
+    rm "${S}"/{control,data,debian,builder}* || die
 }
 
 src_install() {
@@ -70,8 +70,6 @@ pkg_postinst() {
 
     xdg_desktop_database_update
     xdg_mimeinfo_database_update
-
-    gnome2_icon_cache_update
 }
 
 pkg_prerm() {
