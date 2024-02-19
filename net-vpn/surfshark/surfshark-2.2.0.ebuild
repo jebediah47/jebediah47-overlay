@@ -26,7 +26,9 @@ S="${WORKDIR}"
 src_unpack() {
     unpack ${A}
     unpack "${S}"/data.tar.xz
-    rm "${S}"/{control,data,debian,builder}* || die
+    rm "${S}"/{control,data,debian}* || die
+    rm "${S}"/usr/share/doc/surfshark/changelog.gz || die
+    rm "${S}"/_gpgbuilder || die
 }
 
 src_install() {
