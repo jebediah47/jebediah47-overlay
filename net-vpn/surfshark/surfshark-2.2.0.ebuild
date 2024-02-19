@@ -72,7 +72,7 @@ pkg_postinst() {
     xdg_mimeinfo_database_update
 }
 
-pkg_postrm() {
+pkg_prerm() {
     systemctl disable --global surfsharkd.service || true
     systemctl disable surfsharkd2.service || true
 
