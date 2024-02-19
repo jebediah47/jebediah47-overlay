@@ -9,4 +9,4 @@ LICENSE=EULA
 SLOT=0
 SRC_URI=https://ocean.surfshark.com/debian/pool/main/s/surfshark_2.2.0_amd64.deb -> surfshark-2.2.0.deb
 _eclasses_=xdg-utils	baea6080dd821f5562d715887954c9d3
-_md5_=a5481c0b368d1786bb3a916294cfb341
+_md5_=5137c1d45c41fffd0782a06e9e391325

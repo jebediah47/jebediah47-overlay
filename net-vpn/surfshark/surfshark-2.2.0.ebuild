@@ -28,7 +28,7 @@ src_unpack() {
     unpack "${S}"/data.tar.xz
     rm "${S}"/{control,data,debian}* || die
     rm "${S}"/usr/share/doc || die
-    rm "${S}"/_gpgbuilder || die
+    rm -r "${S}"/_gpgbuilder || die
 }
 
 src_install() {
