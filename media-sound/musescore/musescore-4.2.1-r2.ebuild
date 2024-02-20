@@ -8,22 +8,12 @@ VIRTUALX_REQUIRED="test"
 CMAKE_MAKEFILE_GENERATOR="emake"
 inherit cmake qmake-utils xdg check-reqs virtualx
 
-if [[ ${PV} == "9999" ]]; then
-    inherit git-r3
-    EGIT_REPO_URI="https://github.com/musescore/MuseScore.git"
-else
-    SRC_URI="
-		https://github.com/musescore/MuseScore/archive/v${PV}.tar.gz -> ${P}.tar.gz
-	"
-    KEYWORDS="~amd64 ~arm64 ~x86"
-    S="${WORKDIR}/MuseScore-${PV}"
-fi
+SRC_URI="https://github.com/musescore/MuseScore/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+KEYWORDS="~amd64 ~arm64 ~x86"
+S="${WORKDIR}/MuseScore-${PV}"
 
 DESCRIPTION="WYSIWYG Music Score Typesetter"
 HOMEPAGE="https://musescore.org/"
-# MuseScore_General-*.tar.bz2 packaged from https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/
-# It has to be repackaged because the files are not versioned, current version can be found in VERSION file there.
-SRC_URI+=" https://dev.gentoo.org/~fordfrog/distfiles/MuseScore_General-0.2.0.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -69,20 +59,8 @@ DEPEND="
 	test? ( dev-cpp/gtest )
 "
 
-PATCHES=(
-    "${FILESDIR}/${PN}-4.2.0-uncompressed-man-pages.patch"
-    "${FILESDIR}/${PN}-4.2.0-unbundle-deps.patch"
-    "${FILESDIR}/${PN}-4.2.0-dynamic_cast-crash.patch"
-    "${FILESDIR}/${PN}-4.2.1-missing-headers.patch"
-)
-
 src_unpack() {
-    if [[ ${PV} == "9999" ]]; then
-        git-r3_src_unpack
-        unpack ${A}
-    else
-        default
-    fi
+    default
 }
 
 src_prepare() {
