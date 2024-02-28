@@ -5,11 +5,7 @@ EAPI=8
 
 inherit xdg-utils
 
-DESCRIPTION="Warp, the Rust-based terminal for developers and teams
- Warp is a modern, Rust-based terminal with AI built in so teams can
- build great software, faster. Bringing collaboration to the command line,
- Warp lets teams save and share commands for streamlined onboarding and
- incident response."
+DESCRIPTION="Warp, the Rust-based terminal for developers and teams."
 HOMEPAGE="https://warp.dev/"
 SRC_URI="https://releases.warp.dev/stable/v0.2024.02.20.08.01.stable_02/warp-terminal_0.2024.02.20.08.01.stable.02_amd64.deb"
 LICENSE="EULA"
@@ -38,6 +34,8 @@ src_unpack() {
 
 src_install() {
     doins -r *
+    fperms 755 '/opt/warpdotdev/warp-terminal/crashpad_handler'
+    fperms 755 '/opt/warpdotdev/warp-terminal/warp'
     dosym /opt/warpdotdev/warp-terminal/warp /usr/bin/${PN} || die
 }
 
