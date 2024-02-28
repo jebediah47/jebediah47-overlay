@@ -1,0 +1,12 @@
+DEFINED_PHASES=install postinst postrm prerm unpack
+DEPEND=media-libs/fontconfig net-misc/curl media-libs/mesa x11-libs/libX11 x11-libs/libxcb x11-libs/libXcursor x11-libs/libXi x11-libs/libxkbcommon sys-libs/zlib
+DESCRIPTION=Warp, the Rust-based terminal for developers and teams Warp is a modern, Rust-based terminal with AI built in so teams can build great software, faster. Bringing collaboration to the command line, Warp lets teams save and share commands for streamlined onboarding and incident response.
+EAPI=8
+HOMEPAGE=https://warp.dev/
+INHERIT=xdg-utils
+KEYWORDS=~amd64
+LICENSE=EULA
+SLOT=0
+SRC_URI=https://releases.warp.dev/stable/v0.2024.02.20.08.01.stable_02/warp-terminal_0.2024.02.20.08.01.stable.02_amd64.deb
+_eclasses_=xdg-utils	baea6080dd821f5562d715887954c9d3
+_md5_=47a8eab74b11ba6565480f480df4cf7f
