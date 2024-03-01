@@ -43,6 +43,7 @@ src_install() {
 pkg_postinst() {
     xdg_desktop_database_update
     xdg_mimeinfo_database_update
+    dosym /opt/warpdotdev/warp-terminal/warp /usr/bin/${PN} || die
 }
 
 pkg_postrm() {
