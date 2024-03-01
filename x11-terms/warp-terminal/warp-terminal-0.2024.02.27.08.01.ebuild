@@ -37,10 +37,10 @@ src_install() {
     doins -r *
     fperms 755 '/opt/warpdotdev/warp-terminal/crashpad_handler'
     fperms 755 '/opt/warpdotdev/warp-terminal/warp'
+    dosym /opt/warpdotdev/warp-terminal/warp /usr/bin/${PN} || die
 }
 
 pkg_postinst() {
-    dosym /opt/warpdotdev/warp-terminal/warp /usr/bin/${PN} || die
     xdg_desktop_database_update
     xdg_mimeinfo_database_update
 }
