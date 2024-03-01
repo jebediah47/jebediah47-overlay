@@ -12,6 +12,7 @@ LICENSE="EULA"
 KEYWORDS="~amd64"
 SLOT="0"
 IUSE=""
+RESTRICT="strip"
 
 REDEPEND="media-libs/fontconfig
         net-misc/curl
@@ -36,12 +37,16 @@ src_install() {
     doins -r *
     fperms 755 '/opt/warpdotdev/warp-terminal/crashpad_handler'
     fperms 755 '/opt/warpdotdev/warp-terminal/warp'
-    dosym /opt/warpdotdev/warp-terminal/warp /usr/bin/${PN} || die
 }
 
 pkg_postinst() {
+    dosym /opt/warpdotdev/warp-terminal/warp /usr/bin/${PN} || die
     xdg_desktop_database_update
     xdg_mimeinfo_database_update
+}
+
+pkg_prerm() {
+    rm -f "/usr/bin/${PN}" || :
 }
 
 pkg_postrm() {
