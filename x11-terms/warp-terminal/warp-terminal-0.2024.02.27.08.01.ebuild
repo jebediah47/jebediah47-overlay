@@ -39,14 +39,3 @@ src_install() {
     fperms 755 '/opt/warpdotdev/warp-terminal/warp'
     dosym /opt/warpdotdev/warp-terminal/warp /usr/bin/${PN} || die
 }
-
-pkg_postinst() {
-    xdg_desktop_database_update
-    xdg_mimeinfo_database_update
-}
-
-pkg_postrm() {
-    dosym /opt/warpdotdev/warp-terminal/warp /usr/bin/${PN} || die
-    xdg_desktop_database_update
-    xdg_mimeinfo_database_update
-}

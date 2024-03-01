@@ -1,4 +1,4 @@
-DEFINED_PHASES=install postinst postrm unpack
+DEFINED_PHASES=install unpack
 DEPEND=media-libs/fontconfig net-misc/curl media-libs/mesa x11-libs/libX11 x11-libs/libxcb x11-libs/libXcursor x11-libs/libXi x11-libs/libxkbcommon sys-libs/zlib
 DESCRIPTION=Warp, the Rust-based terminal for developers and teams.
 EAPI=8
@@ -10,4 +10,4 @@ RESTRICT=strip
 SLOT=0
 SRC_URI=https://releases.warp.dev/stable/v0.2024.02.27.08.01.stable_03/warp-terminal_0.2024.02.27.08.01.stable.03_amd64.deb
 _eclasses_=xdg-utils	baea6080dd821f5562d715887954c9d3
-_md5_=759293f15e5cdd96f4b2951ce577a8b8
+_md5_=ba0ecb8d02465d067ff31b8405a65473
