@@ -10,4 +10,4 @@ RESTRICT=strip
 SLOT=0
 SRC_URI=https://releases.warp.dev/stable/v0.2024.02.27.08.01.stable_03/warp-terminal_0.2024.02.27.08.01.stable.03_amd64.deb
 _eclasses_=xdg-utils	baea6080dd821f5562d715887954c9d3
-_md5_=84256a013df97fbe2e42b4ee6e427b43
+_md5_=759293f15e5cdd96f4b2951ce577a8b8
